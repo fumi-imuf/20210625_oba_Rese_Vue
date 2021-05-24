@@ -22,3 +22,4 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+# 20210524_oba_Rese_Vue
