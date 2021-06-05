@@ -43,10 +43,10 @@ export default {
     display: flex;
     height: 70px;
     background-color: #fff;
+    align-items: center;
 }
 
 .header-logo {
-    margin-top: 40px;
     margin-left: 90px;
 }
 

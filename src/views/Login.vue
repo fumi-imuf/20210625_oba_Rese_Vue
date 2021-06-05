@@ -5,14 +5,19 @@
       <div class="login-head">
         <h2>Login</h2>
       </div>
-      <div class="input">
-        <!-- <img></img> -->
-        <input placeholder="Email" type="email" />
-        <!-- <img></img> -->
-        <input placeholder="Password" type="password">
+      <div class="input-container">
+        <div class="email">
+          <img src="../assets/img/Email.png"/>
+          <input placeholder="Email" type="email" />
+        </div>
+        <br>
+        <div class="password">
+          <img src="../assets/img/password.png"/>
+          <input placeholder="Password" type="password">
+       </div>
       </div>
       <div class="login-button">
-        <a href="#">ログイン</a>
+        <button @click="login">ログイン</button>
       </div>
     </div>
 </div>
@@ -36,8 +41,8 @@ export default {
 }
 
 .login-container {
-  height: 100px;
-  width: 50%;
+  height: 200px;
+  width: 300px;
   margin: 20% auto;
   border-radius: 5px;
   box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.6);
@@ -45,30 +50,56 @@ export default {
 
 .login-head {
   height: 25%;
+  width: 100%;
   background-color: #5c73b7;
   border-radius: 5px 5px 0 0;
+  display:table;
+
 }
 
-.h2 {
-  
+h2 {
   font-size: 1rem;
   color: #fff;
-  margin: 20px;
+  display:table-cell;
+  vertical-align:middle;
+  padding-left: 10%;
 }
 
-.return {
-  width: 50px;
+.input-container {
+  padding: 20px 30px;
+}
+
+input {
+  width: 80%;
+  border-bottom: 1px solid #ccc;
+  border-right:none;
+  border-left:none;
+  border-top:none;
+  border-radius:0px;
+} 
+
+img {
+  width: 1rem;
+  height: 1rem; 
+  margin-right: 5px;
+}
+
+input, img {
+  vertical-align: bottom;
+}
+
+.login-button {
+  width: 100px;
   height: 25px;
-  padding-top: 10px;
-  background-color: #5c73b7;
   text-align: center;
-  border-radius: 5px;
-  margin: 20px auto;
+  margin: 0 20px 20px auto;
 }
 
-a {
+button {
   color: #fff;
-  text-decoration: none;
+  background-color: #5c73b7;
   cursor: pointer;
+  border-radius: 5px;
+  border: none;
 }
 </style>
