@@ -13,8 +13,8 @@
           </ul>
         </div>
         <div class="search category">
-          <p class="genrue head" @click="genrue">All genrue</p>
-          <ul class="list-box" v-show="genrueList">
+          <p class="genre head" @click="genre">All genre</p>
+          <ul class="list-box" v-show="genreList">
             <li><a href="#">寿司</a></li>
             <li><a href="#">焼肉</a></li>
             <li><a href="#">居酒屋</a></li>
@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       areaList: false,
-      genrueList: false,//最初は閉じてるためfalse
+      genreList: false,//最初は閉じてるためfalse
       //shopList: "",
 
       };
@@ -51,8 +51,8 @@ export default {
     area() {
       this.areaList = !this.areaList;//trueとfalseの切り替え
     },
-    genrue() {
-      this.genrueList = !this.genrueList;
+    genre() {
+      this.genreList = !this.genreList;
     }
   },
   components: {

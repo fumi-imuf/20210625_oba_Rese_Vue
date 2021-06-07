@@ -11,26 +11,8 @@
             
             <img class="delete" src="../assets/img/delete.png" />
             </div>
-          
-          <table>
-            <tr>
-              <th>Shop</th>
-              <td>店名</td><!--{{shop_name}}-->
-            </tr>
-            <tr>
-              <th>Date</th>
-              <td>2021-6-1</td><!--{{date}}-->
-            </tr>
-            <tr>
-              <th>Time</th>
-              <td>18:00</td><!--{{time}}-->
-            </tr>
-            <tr>
-              <th>Number</th>
-              <td>1人</td>
-            </tr>
-          </table>
-        </div>
+            <Reservation />
+          </div>
       </div>
     </div>
     <div class="right">
@@ -46,11 +28,13 @@
 <script>
 import HeaderMenu from "../components/HeaderMenu";
 import ShopList from "../components/ShopList";
+import Reservation from "../components/Reservation";
 
 export default {
   components: {
     HeaderMenu,
-    ShopList
+    ShopList,
+    Reservation
   }
 };
 </script>
@@ -113,19 +97,6 @@ p {
 .delete {
   margin-left: auto; 
   padding: 10px;
-}
-
-th {
-  font-weight: lighter;
-  text-align: left;
-  padding: 10px;
-  font-size: 0.5rem;
-}
-
-td {
-  text-align: left;
-  font-size: 0.5rem;
-  padding-left: 5px;
 }
 
 /* 左側 */

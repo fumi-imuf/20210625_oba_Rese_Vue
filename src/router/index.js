@@ -7,6 +7,7 @@ import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import MyPage from '../views/MyPage.vue'
 import Search from '../views/Search.vue'
+import ShopDetail from '../views/ShopDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -37,7 +38,7 @@ const routes = [
     component: Thanks
   },
   {
-  path: '/myPage',
+  path: '/mypage',
   name: 'MyPage',
   component: MyPage
   },
@@ -45,6 +46,11 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: Search
+  },
+    {
+    path: '/shopdetail',
+    name: 'ShopDetail',
+    component: ShopDetail
   }
 ]
 
