@@ -95,6 +95,7 @@ h1 {
 
 /* active */
 .hamburger.active span:nth-of-type(1){
+    width: 30px;
     top: 20px;
     transform: rotate(45deg);
 }
@@ -104,6 +105,7 @@ h1 {
 }
 
 .hamburger.active span:nth-of-type(3){
+    width: 30px;
     top: 20px;
     transform: rotate(-45deg);
 }

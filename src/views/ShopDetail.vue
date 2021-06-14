@@ -21,6 +21,11 @@
           <p class="detail">{{detail}}</p><!--shops-tableから-->
         </div>
       </div>
+      <div class="like">
+        <button class=like-button @click="fav(index)">お気に入り店舗にする
+          <img class="favorite" src="../assets/img/favorite.png" />
+        </button>
+      </div>
      </div>
    </div>
    <div class="right">
@@ -80,15 +85,18 @@
 <script>
 import HeaderMenu from "../components/HeaderMenu";
 
-
+// 実装すること
+// 店名、images、ジャンル、地域、店舗詳細表示
+// お気に入り登録
+// 予約登録
 export default {
   data() {
     return {
-      shop_name: "仙人",
-      image: "https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg",
-      area: "東京都",
-      genre: "寿司",
-      detail: "料理長厳選の食材から作る寿司を用いたコースをぜひお楽しみください。食材・味・価格、お客様の満足度を徹底的に追及したお店です。特別な日のお食事、ビジネス接待まで気軽に使用することができます。",
+      shop_name: "",
+      image: "",
+      area: "",
+      genre: "",
+      detail: "",
       timeList: false,
       numberList: false,
       time: "",
@@ -163,6 +171,25 @@ h2 {
 
 .detail {
   line-height: 1.6;
+}
+
+.like {
+  margin-right: 30px;
+}
+
+.like-button {
+  width: 200px;
+  margin: 0 0 0 auto;
+  color: #fff;
+  background-color: #5c73b7;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.favorite {
+  width: 15px;
+  margin: 0 1px 0 5px;
 }
 /* ----- */
 /* right */

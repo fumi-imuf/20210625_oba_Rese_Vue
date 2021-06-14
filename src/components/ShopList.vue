@@ -19,8 +19,7 @@
 export default {
   data() {
     return {
-      shops: [{image: "https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg", shop_name: "仙人", area: "東京都", ganrue: "寿司"},
-      {image: "https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg", shop_name: "牛助", area: "大阪府", ganrue: "焼肉"}]
+
     };
   }
 };

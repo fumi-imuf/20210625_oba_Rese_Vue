@@ -8,21 +8,21 @@
       <div class="input-container">
         <div class="username">
           <img src="../assets/img/user.png" />
-          <input placeholder="Username" type="text" />
+          <input placeholder="Username" type="text" v-model="name" />
         </div>
         <br>
         <div class="email">
           <img src="../assets/img/Email.png"/>
-          <input placeholder="Email" type="email" />
+          <input placeholder="Email" type="email" v-model="email"/>
         </div>
         <br>
         <div class="password">
           <img src="../assets/img/password.png"/>
-          <input placeholder="Password" type="password">
+          <input placeholder="Password" type="password" v-model="password">
        </div>
       </div>
       <div class="signup">
-        <button @click="login">登録</button>
+        <button @click="register">登録</button><!--@click="login"を"auth"にしなきゃ動かないかも-->
       </div>
     </div>
 </div>
@@ -30,9 +30,34 @@
 
 <script>
 import HeaderMenu from "../components/HeaderMenu";
+import axios from "axios";
+
 export default {
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: ""
+    };
+  },
   components: {
     HeaderMenu
+  },
+  methods: {
+    register() {
+      axios.post("https://fierce-garden-10453.herokuapp.com/api/register",{
+        name: this.name,
+        email: this.email,
+        password: this.password
+      })
+      .then(response => {
+        console.log(response);
+        this.$router.replace("/") //ログインページへ遷移
+      })
+      .catch(error => {
+        alert(error);
+      });
+    }
   }
 };
 </script>

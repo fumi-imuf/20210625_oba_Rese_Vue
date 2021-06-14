@@ -4,15 +4,35 @@
       <HeaderMenu />
       <div class="reservation container">
         <h3>予約状況</h3>
+        <div v-for="(value, index) in reservations" :key="index">
           <div class="reservation ditail">
             <div class="reservation head">
             <img class="calender" src="../assets/img/reservation.png" />
-            <p>予約１</p>
-            
-            <img class="delete" src="../assets/img/delete.png" />
+            <p>予約{{index + 1}}</p>
+            <img class="delete" src="../assets/img/delete.png" @click="del(index)"/><!--alt v-if="path && profile-->
             </div>
-            <Reservation />
+            <div class="reservation-container">
+              <table>
+                <tr>
+                 <th>Shop</th>
+                 <td>{{value.shop_name}}</td><!--valueいるか-->
+                </tr>
+                <tr>
+                 <th>Date</th>
+                 <td>{{value.reservation_date}}</td>
+               </tr>
+               <tr>
+                 <th>Time</th>
+                 <td>{{value.reservation_time}}</td>
+               </tr>
+               <tr>
+                 <th>Number</th>
+                 <td>{{value.reservation_number}}</td>
+               </tr>
+              </table>
+            </div>
           </div>
+        </div>
       </div>
     </div>
     <div class="right">
@@ -24,17 +44,47 @@
     </div>
   </div>
 </template>
-
 <script>
+import axios from 'axios';
 import HeaderMenu from "../components/HeaderMenu";
 import ShopList from "../components/ShopList";
-import Reservation from "../components/Reservation";
-
+// https://fierce-garden-10453.herokuapp.com/
 export default {
+  data() {
+    return {
+      reservations: []
+    }
+  },
   components: {
     HeaderMenu,
     ShopList,
-    Reservation
+  },
+  methods: {
+    del(index) {
+      axios
+      .delete( 
+        "https:fierce-garden-10453.herokuapp.com/api/reservations" + this.reservations[index].item.id
+      )
+      .then((response) => { //処理後のリロード
+      console.log(response);
+       this.$router.go({
+        path: this.$router.currentRoute.path,
+        force: true,
+       });
+      });
+    },
+    async getReservations() {
+      let data = [];
+      const reservations = await asiox.get(
+        "https://fierce-garden-10453.herokuapp.com/"
+      );
+      for (let i = 0; i < reservations.data.data.length; i++) {
+        await axios
+        .get("https://fierce-garden-10453.herokuapp.com/" + reservations.data.data[i].id)
+        this.reservations = data;
+        console.log(this.reservations);
+      }
+    }
   }
 };
 </script>
@@ -47,7 +97,7 @@ export default {
 }
 
 .left {
-  width: 250px;
+  width: 50%;
 }
 /*
 .right {
@@ -97,6 +147,27 @@ p {
 .delete {
   margin-left: auto; 
   padding: 10px;
+}
+
+.reservation-container {
+  width: 80%;
+  background-color: #5c73b7;
+  border-radius: 5px;
+  color: #fff;
+  padding: 5px;
+}
+
+th {
+  font-weight: lighter;
+  text-align: left;
+  padding: 10px;
+  font-size: 0.5rem;
+}
+
+td {
+  text-align: left;
+  font-size: 0.5rem;
+  padding-left: 5px;
 }
 
 /* 左側 */

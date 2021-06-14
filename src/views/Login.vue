@@ -8,16 +8,16 @@
       <div class="input-container">
         <div class="email">
           <img src="../assets/img/Email.png"/>
-          <input placeholder="Email" type="email" />
+          <input placeholder="Email" type="email" v-model="email" />
         </div>
         <br>
         <div class="password">
           <img src="../assets/img/password.png"/>
-          <input placeholder="Password" type="password">
+          <input placeholder="Password" type="password" v-model="password">
        </div>
       </div>
       <div class="login-button">
-        <button @click="login">ログイン</button>
+        <button @click="login">ログイン</button><!--@click="login"を"auth"にしなきゃ動かないかも-->
       </div>
     </div>
 </div>
@@ -25,9 +25,24 @@
 
 <script>
 import HeaderMenu from "../components/HeaderMenu";
+
 export default {
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
   components: {
     HeaderMenu
+  },
+  methods: {
+    ligin() {
+      this.$store.commit("login", {
+        email: this.email,
+        password: this.password
+      });
+    }
   }
 };
 </script>

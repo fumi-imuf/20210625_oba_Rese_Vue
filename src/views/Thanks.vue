@@ -5,8 +5,8 @@
       <div class="message">
         <p>会員登録ありがとうございます</p>
       </div>
-      <div class="return">
-        <a href="#">ログインする</a>
+      <div class="return" @click="$router.push('/')">
+        <p>ログインする</p>
       </div>
     </div>
 </div>
@@ -39,7 +39,7 @@ export default {
   box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.6);
 }
 
-p {
+.message {
   font-size: 1rem;
   text-align: center;
   color: #000;
@@ -54,11 +54,7 @@ p {
   text-align: center;
   border-radius: 5px;
   margin: 20px auto;
-}
-
-a {
   color: #fff;
-  text-decoration: none;
   cursor: pointer;
 }
 </style>

@@ -5,8 +5,8 @@
       <div class="message">
         <p>ご予約ありがとうございます</p>
       </div>
-      <div class="return">
-        <a href="#">戻る</a>
+      <div class="return" @click="$router.push('/home')">
+        <p>戻る</p>
       </div>
     </div>
 </div>
@@ -39,7 +39,7 @@ export default {
   position: relative;
 }
 
-p {
+.message {
   font-size: 1rem;
   text-align: center;
   color: #000;
@@ -54,13 +54,10 @@ p {
   text-align: center;
   border-radius: 5px;
   margin: 20px auto;
-}
-
-a {
   color: #fff;
-  text-decoration: none;
   cursor: pointer;
 }
+
 </style>
 
 
