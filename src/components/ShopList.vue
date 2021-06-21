@@ -7,7 +7,12 @@
           <p class="area">#{{value.area}}</p>
           <p class="ganrue">#{{value.ganrue}}</p>
           <div class="bottom-container">
-            <button class="detail">詳しく見る</button><!--@button="detail"-->
+            <button class="detail" 
+            @click="
+            $router.push({
+              path: '/shopdetail/' + value.item.id,
+              params: { id: value.item.id }//shop_idを渡す
+              })">詳しく見る</button>
             <img class="favorite" src="../assets/img/favorite.png" /><!--{{favorite}}assets/img/favoriteをバックエンドのDBに入れる-->
           </div>
         </div>
@@ -16,10 +21,13 @@
 </template>
 
 <script>
+//全店表示したい
+//apiから出すデータ・・・img, shop_name, area, genre(shop_idで繋がっている)  
+//全店表示するには全てのshop_idを出す
 export default {
   data() {
     return {
-
+     shops:[]
     };
   }
 };

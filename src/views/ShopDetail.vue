@@ -22,9 +22,10 @@
         </div>
       </div>
       <div class="like">
-        <button class=like-button @click="fav(index)">お気に入り店舗にする
-          <img class="favorite" src="../assets/img/favorite.png" />
+        <button class="like-button" v-if="like" @click="addFav">お気に入りに登録する
+          <img class="like" src="../assets/img/favorite.png" />
         </button>
+        <button class="dislike-button" v-else @click="delFav">お気に入りからはずす<img class="dislike" src="../assets/img/dislike.png"></button>
       </div>
      </div>
    </div>
@@ -59,7 +60,7 @@
          <table>
            <tr>
              <th>Shop</th>
-             <td>{{shop_name}}</td><!--{{shop_name}}-->
+             <td>{{shops.shop_name}}</td><!--{{shop_name}}-->
            </tr>
            <tr>
              <th>Date</th>
@@ -84,7 +85,7 @@
 
 <script>
 import HeaderMenu from "../components/HeaderMenu";
-
+import axios from "axios"
 // 実装すること
 // 店名、images、ジャンル、地域、店舗詳細表示
 // お気に入り登録
@@ -92,17 +93,53 @@ import HeaderMenu from "../components/HeaderMenu";
 export default {
   data() {
     return {
-      shop_name: "",
-      image: "",
-      area: "",
-      genre: "",
-      detail: "",
+      shops: [],
       timeList: false,
       numberList: false,
       time: "",
       number: ""
     }
   },
+  methods: {
+    addFav() { //favoriteにindex番号を与える
+    axios
+     .post("https:fierce-garden-10453.herokuapp.com/api/like", {
+       shop_id: this.shops.shop_name.item.id,
+       user_id: this.$store.state.user.id
+     })
+     .then((response)=> {
+       console.log(response);
+       this.$router.go({
+         path: this.$router.ShopDetail,
+         force: true
+       });
+     });
+    },
+    delFav() {
+      axios
+      .delete("https:fierce-garden-10453.herokuapp.com/api/like" + this.shops.item.id)
+      .then((response) => {
+        console.log(response);
+        this.$router.go({
+          path: this.$router.ShopDetail,
+          force: true
+        });
+      });
+    }
+  },
+  //async getShops() {
+    //受け取りたいデータ{ 
+    //shops:["shop_name", "datail"],
+    //areas: area,
+    //genres: genre
+  //},
+  // let data = [];
+  // const shops = await axios.get("https:fierce-garden-10453.herokuapp.com/api/shop" + data.id)
+  // .then((response) => {
+
+   //})
+
+  //},
     components: {
       HeaderMenu
     },
@@ -187,7 +224,7 @@ h2 {
   display: flex;
 }
 
-.favorite {
+img .like {
   width: 15px;
   margin: 0 1px 0 5px;
 }

@@ -62,12 +62,13 @@ const routes = [
     }
   },
     {
-    path: '/shopdetail',
+    path: '/shopdetail/:id',
     name: 'ShopDetail',
     component: ShopDetail,
     meta: {
     requiresAuth: true //認証許可
-    }
+      },
+    props: true
   }
 ]
 
