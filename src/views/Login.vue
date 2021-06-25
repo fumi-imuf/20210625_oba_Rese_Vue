@@ -37,7 +37,7 @@ export default {
     HeaderMenu
   },
   methods: {
-    ligin() {
+    login() {
       this.$store.commit("login", {
         email: this.email,
         password: this.password

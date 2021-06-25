@@ -1,6 +1,7 @@
 // 全体やること
 // SignUp.vue css button色反転
-
+//Laravel "http://127.0.0.1:8000"
+//heroku  "https:fierce-garden-10453.herokuapp.com/api/"
 
 //確認 store-10行目,auth(signup要変更かも)
 import Vue from 'vue'
@@ -12,17 +13,17 @@ import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import Search from '../views/Search.vue'
 import ShopDetail from '../views/ShopDetail.vue'
-import store from "../store/index"
+//import store from "../store/index"
 
 
 Vue.use(VueRouter)
 
 
 const routes = [
-    {
+  {
     path: '/',
     name: 'Login',
-    component: Login
+    component: Login,
   },
   {
     path: '/signup',
@@ -33,42 +34,42 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
-    meta: {
-      requiresAuth: true //認証許可
-    }
+    //meta: {
+      //requiresAuth: true //認証許可
+    //}
   },
   {
     path: '/complete',
     name: 'Complete',
     component: Complete,
-    meta: {
-    requiresAuth: true //認証許可
-    }
+    //meta: {
+    //requiresAuth: true //認証許可
+    //}
   },
   {
     path: '/thanks',
     name: 'Thanks',
     component: Thanks,
-    meta: {
-    requiresAuth: true //認証許可
-    }
+    //meta: {
+    //requiresAuth: true //認証許可
+    //}
   },
   {
     path: '/search',
     name: 'Search',
     component: Search,
-    meta: {
-    requiresAuth: true //認証許可
-    }
+    //meta: {
+    //requiresAuth: true //認証許可
+    //}
   },
     {
     path: '/shopdetail/:id',
     name: 'ShopDetail',
     component: ShopDetail,
-    meta: {
-    requiresAuth: true //認証許可
-      },
-    props: true
+    //meta: {
+    //requiresAuth: true //認証許可
+      //},
+    //props: true
   }
 ]
 
@@ -78,19 +79,19 @@ const router = new VueRouter({
   routes
 })
 //認証許可
-router.beforeEach((to, from, next) => {
-  if (
-    to.matched.some((record) => record.meta.requiresAuth) && !store.state.auth //storeフォルダ
-  ) {
-    next({
-      path: "/",
-      query: {
-        redirect: to.fullPath,
-      },
-    });
-  } else {
-    next();
-  }
-});
+//router.beforeEach((to, from, next) => {
+  //if (
+    //to.matched.some((record) => record.meta.requiresAuth) && !store.//state.auth //storeフォルダ
+  //) {
+    //next({
+      //path: "/",
+      //query: {
+        //redirect: to.fullPath,
+      //},
+    //});
+  //} else {
+    //next();
+  //}
+//});
 
 export default router

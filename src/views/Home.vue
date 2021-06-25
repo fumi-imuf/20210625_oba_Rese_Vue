@@ -49,6 +49,7 @@ import axios from 'axios';
 import HeaderMenu from "../components/HeaderMenu";
 import ShopList from "../components/ShopList";
 // https://fierce-garden-10453.herokuapp.com/
+// http://127.0.0.1:8000
 export default {
   data() {
     return {
@@ -63,7 +64,7 @@ export default {
     del(index) {
       axios
       .delete( 
-        "https:fierce-garden-10453.herokuapp.com/api/reservations" + this.reservations[index].item.id
+        "http://127.0.0.1:8000/api/reservations/" + this.reservations[index].item.id
       )
       .then((response) => { //処理後のリロード
       console.log(response);
@@ -75,12 +76,12 @@ export default {
     },
     async getReservations() {
       let data = [];
-      const reservations = await asiox.get(
-        "https://fierce-garden-10453.herokuapp.com/"
+      const reservations = await axios.get(
+        "http://127.0.0.1:8000/api/reservations"
       );
       for (let i = 0; i < reservations.data.data.length; i++) {
         await axios
-        .get("https://fierce-garden-10453.herokuapp.com/" + reservations.data.data[i].id)
+        .get("http://127.0.0.1:8000/api/reservations" + reservations.data.data[i].id)
         this.reservations = data;
         console.log(this.reservations);
       }

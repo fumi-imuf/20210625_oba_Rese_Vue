@@ -21,24 +21,25 @@ export default new Vuex.Store({
     },
     logout(state, payload) {
       state.auth = payload;
-    },
+    }
   },
   actions: {//非同期処理ができる
     async login({ commit }, { email, password }) {
-      const responseLogin = await axios.post("https:/fierce-garden-10453.herokuapp.com/api/login", {
+      const responseLogin = await axios.post("http://127.0.0.1:8000/api/login", {
         email: email,
         password: password
       });
       const responseUser = await axios.get(
-        "https://fierce-garden-10453.herokuapp.com/api/user", {
+        "http://127.0.0.1:8000/api/user", {
         params: { email: email }
       });
-      commit("auth", responseLogin.data.auth); commit("user", responseUser.data.data[0]);
+      commit("auth", responseLogin.data.auth);
+      commit("user", responseUser.data.data[0]);
       router.replace("/home");
     },
     logout({ commit }) {
       axios
-        .post("https://fierce-garden-10453.herokuapp.com/api/logout", {
+        .post("http://127.0.0.1:8000/api/logout", {
           auth: this.state.auth
         })
         .then((response) => {

@@ -5,7 +5,7 @@
         <div class="content">
           <p class="shop-name">{{value.shop_name}}</p>
           <p class="area">#{{value.area}}</p>
-          <p class="ganrue">#{{value.ganrue}}</p>
+          <p class="ganrue">#{{value.ganre}}</p>
           <div class="bottom-container">
             <button class="detail" 
             @click="
@@ -13,7 +13,7 @@
               path: '/shopdetail/' + value.item.id,
               params: { id: value.item.id }//shop_idを渡す
               })">詳しく見る</button>
-            <img class="favorite" src="../assets/img/favorite.png" /><!--{{favorite}}assets/img/favoriteをバックエンドのDBに入れる-->
+            <img class="favorite" src="../assets/img/favorite.png" @click="fav(index)"/><!--{{favorite}}assets/img/favoriteをバックエンドのDBに入れる-->
           </div>
         </div>
     </div>
@@ -24,13 +24,101 @@
 //全店表示したい
 //apiから出すデータ・・・img, shop_name, area, genre(shop_idで繋がっている)  
 //全店表示するには全てのshop_idを出す
+import axios from "axios"
 export default {
+  props: ["id"],
   data() {
     return {
      shops:[]
-    };
-  }
+    };  
+  },
+    methods: {
+    fav(index) {
+      const result = this.shops[index].like.some((value) => {
+        return value.user_id == this.$store.state.user.id;
+      });
+      if (result) {
+        this.shops[index].like.forEach((element) => {
+          if (element.user_id == this.$store.state.user.id) {
+            axios({
+              method: "delete",
+              url: "http://127.0.0.1:8000/api/like",
+              data: {
+                shop_id: this.shops[index].item.id,
+                user_id: this.$store.state.user.id,
+              },
+            }).then((response) => {
+              console.log(response);
+              this.$router.go({
+                path: this.$router.currentRoute.path,
+                force: true,
+              });
+            });
+          }
+        });
+      } else {
+        axios
+          .post("http://127.0.0.1:8000/api/like", {
+            shop_id: this.shops[index].item.id,
+            user_id: this.$store.state.user.id,
+          })
+          .then((response) => {
+            console.log(response);
+            this.$router.go({
+              path: this.$router.currentRoute.path,
+              force: true,
+            });
+          });
+      }
+    },
+    del(index) {
+      axios
+        .delete(
+          "http://127.0.0.1:8000/api/shops/" +
+            this.shops[index].item.id
+        )
+        .then((response) => {
+          console.log(response);
+          this.$router.go({
+            path: this.$router.currentRoute.path,
+            force: true,
+          });
+        });
+    },
+    async getShops() {
+      let data = [];
+      const shops = await axios.get(
+        "http://127.0.0.1:8000/api/shops"
+      );
+      for (let i = 0; i < shops.data.data.length; i++) {
+        await axios
+          .get(
+            "http://127.0.0.1:8000/api/shops/" +
+            shops.data.data[i].id
+          )
+          //.then((response) => {
+            //if (this.$route.name == "profile") {
+              //if (response.data.item.user_id == this.$store.state.user.id) {
+                //data.push(response.data);
+              //}
+            //} else if (this.$route.name == "detail") {
+              //if (response.data.item.id == this.id) {
+                //data.push(response.data);
+              //}
+            //} else {
+              //data.push(response.data);
+            //}
+          //});
+      }
+      this.shops = data;
+      console.log(this.shops);
+    },
+  },
+  created() {
+    this.getShops();
+  },
 };
+
 </script>
 
 <style scoped>
